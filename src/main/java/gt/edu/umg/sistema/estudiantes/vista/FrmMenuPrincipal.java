@@ -64,10 +64,18 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }
 
     private void btnFacturacionActionPerformed(java.awt.event.ActionEvent evt) {
-        FrmFacturacion ventana = new FrmFacturacion();
-        ventana.setLocationRelativeTo(null);
-        ventana.setVisible(true);
-        dispose();
+        try {
+            FrmFacturacion ventana = new FrmFacturacion();
+            ventana.setLocationRelativeTo(null);
+            ventana.setVisible(true);
+            dispose();
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "No se pudo abrir facturación.\n" + ex.getClass().getName() + ": " + ex.getMessage(),
+                    "Error",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     // Variables declaration - do not modify

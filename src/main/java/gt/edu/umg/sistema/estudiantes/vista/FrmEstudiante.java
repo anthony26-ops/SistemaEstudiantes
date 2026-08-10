@@ -152,7 +152,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
     
     public void cargarDatosTabla(List<Estudiante> listaEstudiantes) {
     // 1. Definir los encabezados de las columnas
-    String[] columnas = {"ID", "Nombre", "Apellido", "Correo"}; 
+    String[] columnas = {"ID", "Nombres", "Apellidos", "Correo", "Carnet"}; 
     
     // 2. Crear el modelo (bloqueando la edición directa si lo deseas)
     DefaultTableModel modelo = new DefaultTableModel(columnas, 0) {
@@ -180,6 +180,11 @@ public class FrmEstudiante extends javax.swing.JFrame {
     
     private void BtnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGrabarActionPerformed
         // TODO add your handling code here:
+        if (txtId.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese el ID del estudiante.");
+            return;
+        }
+
         Estudiante estudiante = new Estudiante();
         estudiante.setId(Integer.parseInt(txtId.getText()));
         estudiante.setNombres(txtNombres.getText());
@@ -196,7 +201,6 @@ public class FrmEstudiante extends javax.swing.JFrame {
             limpiarCampos();
             refrescarTabla();
         
-      cargarDatosTabla(controller.GetEstudiantes());
         
     }//GEN-LAST:event_BtnGrabarActionPerformed
 

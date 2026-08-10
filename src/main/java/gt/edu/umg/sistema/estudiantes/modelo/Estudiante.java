@@ -55,6 +55,11 @@ public class Estudiante {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Estudiante{id=" + id + ", nombres='" + nombres + "', apellidos='" + apellidos + "'}";
+    }
     
     
 }

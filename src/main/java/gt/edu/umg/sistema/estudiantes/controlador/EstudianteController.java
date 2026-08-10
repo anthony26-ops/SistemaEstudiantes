@@ -15,17 +15,17 @@ import java.util.List;
  */
 public class EstudianteController {
     
-    EstudianteDAOImpl dao;
+    private final EstudianteDAO dao;
     
    public EstudianteController(){
        dao = new EstudianteDAOImpl(); 
-   }
+    }
     
     public void Guardar(Estudiante estudiante){
-                dao.guardar(estudiante);
+        dao.guardar(estudiante);
     }
     
     public List<Estudiante> GetEstudiantes(){
-                return dao.listar();
+        return dao.listar();
     }
 }

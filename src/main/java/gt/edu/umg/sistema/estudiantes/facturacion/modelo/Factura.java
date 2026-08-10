@@ -8,12 +8,21 @@ import java.util.List;
  */
 public class Factura {
 
+    private Long id;
     private String numeroFactura;
     private String fechaFactura;
     private String nombreCliente;
     private String nitCliente;
     private String direccionCliente;
     private final List<DetalleFactura> detalles = new ArrayList<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNumeroFactura() {
         return numeroFactura;

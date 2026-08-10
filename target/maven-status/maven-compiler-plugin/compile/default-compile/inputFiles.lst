@@ -1,5 +1,7 @@
 /Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/NewJFrame.java
 /Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/SistemaEstudiantes.java
+/Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/bd/ConexionException.java
+/Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/bd/ConexionMySQL.java
 /Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/controlador/EstudianteController.java
 /Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/dao/EstudianteDAO.java
 /Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/dao/EstudianteDAOImpl.java

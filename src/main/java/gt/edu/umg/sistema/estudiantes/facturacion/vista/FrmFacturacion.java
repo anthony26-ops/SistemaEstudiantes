@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.SwingUtilities;
 
 public class FrmFacturacion extends javax.swing.JFrame {
 
@@ -25,6 +26,7 @@ public class FrmFacturacion extends javax.swing.JFrame {
         txtFechaFactura.setText(LocalDate.now().toString());
         configurarTabla();
         actualizarTotal();
+        cargarHistorialEnSegundoPlano();
     }
 
     @SuppressWarnings("unchecked")
@@ -54,6 +56,9 @@ public class FrmFacturacion extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDetalles = new javax.swing.JTable();
+        lblHistorial = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblFacturasGuardadas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Formulario de Facturación");
@@ -101,6 +106,20 @@ public class FrmFacturacion extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblDetalles);
 
+        lblHistorial.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        lblHistorial.setText("Facturas guardadas");
+
+        tblFacturasGuardadas.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{"Factura", "Fecha", "Cliente", "Total"}
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+        jScrollPane2.setViewportView(tblFacturasGuardadas);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,6 +128,8 @@ public class FrmFacturacion extends javax.swing.JFrame {
                                 .addGap(24, 24, 24)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jScrollPane1)
+                                        .addComponent(lblHistorial)
+                                        .addComponent(jScrollPane2)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(lblNumeroFactura)
@@ -185,6 +206,10 @@ public class FrmFacturacion extends javax.swing.JFrame {
                                         .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                                .addGap(16, 16, 16)
+                                .addComponent(lblHistorial)
+                                .addGap(8, 8, 8)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                                 .addGap(18, 18, 18))
         );
 
@@ -290,6 +315,7 @@ public class FrmFacturacion extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, "Factura guardada con éxito. Total: " + String.format("%.2f", factura.getTotal()));
         limpiarFormulario();
+        cargarHistorialEnSegundoPlano();
     }
 
     private boolean fechaValida(String fecha) {
@@ -336,6 +362,46 @@ public class FrmFacturacion extends javax.swing.JFrame {
         actualizarTotal();
     }
 
+    private void cargarFacturasGuardadas(List<Factura> facturas) {
+        DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{"Factura", "Fecha", "Cliente", "Total"}
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        for (Factura factura : facturas) {
+            modelo.addRow(new Object[]{
+                factura.getNumeroFactura(),
+                factura.getFechaFactura(),
+                factura.getNombreCliente(),
+                String.format("%.2f", factura.getTotal())
+            });
+        }
+
+        tblFacturasGuardadas.setModel(modelo);
+    }
+
+    private void refrescarHistorial() {
+        cargarFacturasGuardadas(controller.listar());
+    }
+
+    private void cargarHistorialEnSegundoPlano() {
+        Thread hilo = new Thread(() -> {
+            try {
+                List<Factura> facturas = controller.listar();
+                SwingUtilities.invokeLater(() -> cargarFacturasGuardadas(facturas));
+            } catch (RuntimeException ex) {
+                logger.warning("No se pudo cargar el historial de facturas: " + ex.getMessage());
+            }
+        }, "carga-historial-facturas");
+        hilo.setDaemon(true);
+        hilo.start();
+    }
+
     public List<Factura> getFacturasGuardadas() {
         return controller.listar();
     }
@@ -348,7 +414,9 @@ public class FrmFacturacion extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JLabel lblHistorial;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblDireccionCliente;
     private javax.swing.JLabel lblFechaFactura;
@@ -359,6 +427,7 @@ public class FrmFacturacion extends javax.swing.JFrame {
     private javax.swing.JLabel lblProducto;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTotal;
+    private javax.swing.JTable tblFacturasGuardadas;
     private javax.swing.JTable tblDetalles;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtDireccionCliente;
