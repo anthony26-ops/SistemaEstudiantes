@@ -3,5 +3,12 @@
 /Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/controlador/EstudianteController.java
 /Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/dao/EstudianteDAO.java
 /Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/dao/EstudianteDAOImpl.java
+/Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/facturacion/controlador/FacturaController.java
+/Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/facturacion/dao/FacturaDAO.java
+/Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/facturacion/dao/FacturaDAOImpl.java
+/Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/facturacion/modelo/DetalleFactura.java
+/Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/facturacion/modelo/Factura.java
+/Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/facturacion/vista/FrmFacturacion.java
 /Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/modelo/Estudiante.java
 /Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/vista/FrmEstudiante.java
+/Users/anthonyjolon/Documents/UMG/Progra2/sistema-estudiantesAJ/src/main/java/gt/edu/umg/sistema/estudiantes/vista/FrmMenuPrincipal.java
